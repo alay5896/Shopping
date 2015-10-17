@@ -53,3 +53,18 @@ git pull
 git pull -u origin master
 git pull -u origin master
 git pull origin master
+git checkout master
+ls
+cat README.md 
+git branch
+git checkout nilkanth
+git merge 
+git add -A
+git commit
+git branch
+git checkout nilkanth
+git status
+git add -A
+git commit
+git merge master
+git status
