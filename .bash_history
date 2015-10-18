@@ -68,3 +68,10 @@ git add -A
 git commit
 git merge master
 git status
+git status
+git add -A
+git checkout master
+git add -A
+git commit -m "Hello"
+git push origin master
+git status
