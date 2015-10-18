@@ -93,3 +93,15 @@ git rm index.jsp x.jsp
 git rm index.jsp
 ls
 git commit -m "Removed index.jsp"
+git push
+git pull
+ls
+cd Shopping/
+cd Shopping/
+cd WebContent/
+ls
+git add -A
+cd ../../..
+git add -A
+git commit -m "Removed index.jsp"
+git push
