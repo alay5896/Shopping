@@ -75,3 +75,21 @@ git add -A
 git commit -m "Hello"
 git push origin master
 git status
+git status
+git add -A
+git stastus
+git status
+git commit -m "Made layout for home page"
+git push -u origin master
+git pull
+ls
+cd Shopping/
+ls
+cd Shopping/
+ls
+cd WebContent/
+ls
+git rm index.jsp x.jsp
+git rm index.jsp
+ls
+git commit -m "Removed index.jsp"
