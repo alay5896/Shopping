@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2015 at 06:26 AM
+-- Generation Time: Oct 19, 2015 at 09:20 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -23,31 +23,51 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Table structure for table `address`
 --
 
-CREATE TABLE IF NOT EXISTS `cart` (
+CREATE TABLE IF NOT EXISTS `address` (
+  `address_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `line_1` varchar(100) NOT NULL,
+  `line_2` varchar(100) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `pincode` int(6) NOT NULL,
+  `mobile` bigint(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Table structure for table `cart`
 --
 
-CREATE TABLE IF NOT EXISTS `order` (
-  `order_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cart` (
   `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `order_detail` (
+  `order_id` int(11) NOT NULL,
+  `order_no` varchar(16) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `mobile` bigint(10) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `pincode` int(6) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `total_amount` int(11) NOT NULL,
-  `status` bit(1) NOT NULL,
-  `type_of_payment` varchar(20) NOT NULL
+  `payment_status` bit(1) NOT NULL,
+  `type_of_payment` varchar(20) NOT NULL,
+  `shipping_status` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -71,13 +91,17 @@ CREATE TABLE IF NOT EXISTS `order_product` (
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
+  `company` varchar(100) NOT NULL,
   `price` int(11) NOT NULL,
-  `features` varchar(1000) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `category` varchar(30) NOT NULL,
   `offer` int(11) NOT NULL DEFAULT '0',
-  `offer_expires` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `offer_expires` datetime NOT NULL,
+  `warranty_months` int(11) NOT NULL,
+  `features` varchar(1000) NOT NULL,
+  `quantity_available` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -101,18 +125,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL,
   `email` varchar(32) NOT NULL,
   `pass` varchar(32) NOT NULL,
-  `mobile` bigint(10) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `pincode` int(6) NOT NULL,
+  `dob` date NOT NULL,
+  `gender` bit(1) NOT NULL,
   `active` bit(1) NOT NULL DEFAULT b'1',
-  `logged_in` bit(1) NOT NULL
+  `logged_in` bit(1) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`);
 
 --
 -- Indexes for table `cart`
@@ -123,9 +154,9 @@ ALTER TABLE `cart`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `order`
+-- Indexes for table `order_detail`
 --
-ALTER TABLE `order`
+ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `order_id` (`order_id`,`user_id`),
   ADD KEY `user_id` (`user_id`);
@@ -143,7 +174,6 @@ ALTER TABLE `order_product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `product_id` (`product_id`);
 
 --
@@ -167,15 +197,20 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `order`
+-- AUTO_INCREMENT for table `address`
 --
-ALTER TABLE `order`
+ALTER TABLE `address`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `product_image`
 --
@@ -198,17 +233,17 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `order`
+-- Constraints for table `order_detail`
 --
-ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `order_detail`
+  ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `order_product`
 --
 ALTER TABLE `order_product`
   ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order_detail` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `product_image`
