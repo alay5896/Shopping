@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file://C:\Users\Nilkanth\Google Drive\Labs\5th sem\MIT\Ass6\Ass6_1.asm" added="2015-10-18T14:14:38Z" modified="2015-10-18T14:14:38Z" visited="2015-10-18T14:15:34Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="gnusim8085.exe" exec="&apos;gnusim8085.exe %u&apos;" timestamp="1445177678" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file://C:\Users\Nilkanth\Google Drive\Labs\5th sem\MIT\Ass6\Ass6_2.asm" added="2015-10-18T14:16:12Z" modified="2015-10-18T14:16:12Z" visited="2015-10-18T14:16:20Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="gnusim8085.exe" exec="&apos;gnusim8085.exe %u&apos;" timestamp="1445177772" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file://C:\Users\Nilkanth\Google Drive\Labs\5th sem\MIT\Ass6\Ass6_3.asm" added="2015-10-18T14:16:32Z" modified="2015-10-18T14:16:32Z" visited="2015-10-18T14:16:34Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="gnusim8085.exe" exec="&apos;gnusim8085.exe %u&apos;" timestamp="1445177792" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

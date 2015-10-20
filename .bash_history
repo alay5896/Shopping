@@ -105,3 +105,7 @@ cd ../../..
 git add -A
 git commit -m "Removed index.jsp"
 git push
+git status
+git add -A
+git commit -m "Made index.jsp"
+git push
