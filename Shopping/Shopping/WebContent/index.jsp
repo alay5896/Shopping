@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%
+    String usname =String.valueOf(session.getAttribute("username"));
+    if(usname.contentEquals("admin"))
+    {
+    	out.println("Hello Admin");
+    }
+    session.setAttribute("username","admin");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
