@@ -109,3 +109,11 @@ git status
 git add -A
 git commit -m "Made index.jsp"
 git push
+git pull
+git status
+git add -A
+git commit -m "Added Database"
+git push
+git status
+git pull
+git clone https://github.com/nilkanth987/ChatSecureAndroid.git

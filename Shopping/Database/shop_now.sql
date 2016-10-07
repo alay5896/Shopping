@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.4.12
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2015 at 09:20 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Oct 27, 2015 at 01:52 PM
+-- Server version: 5.6.25
+-- PHP Version: 5.5.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shopping`
+-- Database: `shop_now`
 --
 
 -- --------------------------------------------------------
@@ -94,8 +94,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `company` varchar(100) NOT NULL,
   `price` int(11) NOT NULL,
   `category` varchar(30) NOT NULL,
-  `offer` int(11) NOT NULL DEFAULT '0',
-  `offer_expires` datetime NOT NULL,
+  `discount` int(11) NOT NULL DEFAULT '0',
+  `discount_expires` datetime NOT NULL,
   `warranty_months` int(11) NOT NULL,
   `features` varchar(1000) NOT NULL,
   `quantity_available` int(11) NOT NULL,
@@ -118,6 +118,20 @@ CREATE TABLE IF NOT EXISTS `product_image` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `promo`
+--
+
+CREATE TABLE IF NOT EXISTS `promo` (
+  `promo_code` varchar(14) NOT NULL,
+  `promo_amt` int(11) DEFAULT NULL,
+  `promo_discount` int(11) DEFAULT NULL,
+  `due_date` timestamp NULL DEFAULT NULL,
+  `min_bill_amt` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -128,8 +142,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
   `dob` date NOT NULL,
-  `gender` bit(1) NOT NULL,
-  `active` bit(1) NOT NULL DEFAULT b'1',
+  `gender` varchar(10) NOT NULL DEFAULT 'male',
   `logged_in` bit(1) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -182,6 +195,12 @@ ALTER TABLE `product`
 ALTER TABLE `product_image`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `promo`
+--
+ALTER TABLE `promo`
+  ADD PRIMARY KEY (`promo_code`);
 
 --
 -- Indexes for table `user`
